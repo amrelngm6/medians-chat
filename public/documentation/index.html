@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - Medians Chat Interactive Portfolio & CMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-body: #f5f5f5;
+            --bg-sidebar: #1a1a1a;
+            --bg-card: #ffffff;
+            --bg-card-hover: #fff4ec;
+            --border-color: rgba(0, 0, 0, 0.09);
+            --border-glow: rgba(255, 107, 0, 0.25);
+            --primary: #ff6b00;
+            --primary-hover: #cc5500;
+            --primary-tint: #fff0e6;
+            --primary-tint2: #ffe8d6;
+            --black: #1a1a1a;
+            --black-mid: #2e2e2e;
+            --text-main: #2d2d2d;
+            --text-muted: #6b7280;
+            --text-heading: #111111;
+            --text-sidebar: #e5e5e5;
+            --text-sidebar-m: #9a9a9a;
+            --code-bg: #1e1e1e;
+            --sidebar-width: 280px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-body);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* ─── Sidebar ─────────────────────────────── */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--bg-sidebar);
+            border-right: none;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 24px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .brand-info h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .brand-info span {
+            font-size: 11px;
+            color: var(--primary);
+            letter-spacing: 0.3px;
+            font-weight: 600;
+        }
+
+        .search-box {
+            padding: 14px 16px 6px;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+        }
+
+        .search-input-wrapper i {
+            position: absolute;
+            left: 11px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-sidebar-m);
+            font-size: 13px;
+        }
+
+        .search-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 8px 12px 8px 34px;
+            color: #fff;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-sidebar-m);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px 12px 24px;
+        }
+
+        .nav-group-title {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--text-sidebar-m);
+            font-weight: 700;
+            padding: 14px 10px 5px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 10px;
+            color: #c8c8c8;
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 500;
+            border-radius: 7px;
+            transition: all 0.18s;
+            margin-bottom: 2px;
+        }
+
+        .nav-item i {
+            font-size: 14px;
+            width: 18px;
+            text-align: center;
+            color: var(--text-sidebar-m);
+            transition: color 0.18s;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: rgba(255, 107, 0, 0.15);
+            color: #ffffff;
+        }
+
+        .nav-item:hover i,
+        .nav-item.active i {
+            color: var(--primary);
+        }
+
+        .sidebar-footer {
+            padding: 14px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+            font-size: 12px;
+            color: var(--text-sidebar-m);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* ─── Main ─────────────────────────────────── */
+        .main-wrapper {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-navbar {
+            height: 64px;
+            border-bottom: 1px solid var(--border-color);
+            background-color: rgba(245, 245, 245, 0.9);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 90;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+        }
+
+        .toggle-mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--black);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .top-nav-badges {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11.5px;
+            font-weight: 600;
+            border: 1px solid transparent;
+        }
+
+        .badge-orange {
+            background: var(--primary-tint);
+            color: var(--primary-hover);
+            border-color: rgba(255, 107, 0, 0.2);
+        }
+
+        .badge-black {
+            background: #f0f0f0;
+            color: var(--black-mid);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .badge-emerald {
+            background: #ecfdf5;
+            color: #065f46;
+            border-color: rgba(16, 185, 129, 0.25);
+        }
+
+        .content-area {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px;
+            width: 100%;
+        }
+
+        /* ─── Hero ──────────────────────────────────── */
+        .doc-hero {
+            background: var(--black);
+            border-radius: 18px;
+            padding: 44px 44px 40px;
+            margin-bottom: 44px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-hero::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 340px;
+            height: 340px;
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .doc-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: 30%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .doc-hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+            line-height: 1.2;
+            position: relative;
+        }
+
+        .doc-hero h1 span {
+            color: var(--primary);
+        }
+
+        .doc-hero p {
+            font-size: 15px;
+            color: #a0a0a0;
+            max-width: 680px;
+            margin-bottom: 28px;
+            position: relative;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            font-size: 13px;
+            color: #888;
+            position: relative;
+        }
+
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .hero-meta-item i {
+            color: var(--primary);
+        }
+
+        /* ─── Sections ──────────────────────────────── */
+        .doc-section {
+            margin-bottom: 52px;
+            scroll-margin-top: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 14px;
+            margin-bottom: 24px;
+        }
+
+        .section-number {
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 23px;
+            font-weight: 700;
+            color: var(--text-heading);
+        }
+
+        .sub-heading {
+            font-family: 'Outfit', sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--text-heading);
+            margin: 28px 0 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sub-heading i {
+            color: var(--primary);
+            font-size: 15px;
+        }
+
+        /* ─── Cards ─────────────────────────────────── */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 18px;
+            margin: 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.2s ease;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(255, 107, 0, 0.3);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.07);
+        }
+
+        .feature-card .icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 9px;
+            background: var(--primary-tint);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 14px;
+        }
+
+        .feature-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 7px;
+        }
+
+        .feature-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        /* ─── Alerts ─────────────────────────────────── */
+        .alert {
+            padding: 15px 18px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            gap: 13px;
+            align-items: flex-start;
+            font-size: 13.5px;
+            line-height: 1.5;
+        }
+
+        .alert i {
+            font-size: 17px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .alert-info {
+            background: var(--primary-tint);
+            border: 1px solid rgba(255, 107, 0, 0.2);
+            color: #7a3a00;
+        }
+
+        .alert-warning {
+            background: #fffbeb;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            color: #78350f;
+        }
+
+        .alert-success {
+            background: #ecfdf5;
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            color: #065f46;
+        }
+
+        .alert-info i {
+            color: var(--primary);
+        }
+
+        .alert-warning i {
+            color: #d97706;
+        }
+
+        .alert-success i {
+            color: #059669;
+        }
+
+        /* ─── Code ───────────────────────────────────── */
+        .code-container {
+            background: var(--code-bg);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            margin: 14px 0;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 9px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #7a7a7a;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: none;
+            color: #9a9a9a;
+            padding: 3px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        pre {
+            padding: 16px;
+            overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 13px;
+            color: #d4d4d4;
+            line-height: 1.65;
+        }
+
+        code {
+            font-family: 'Fira Code', monospace;
+            background: var(--primary-tint);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--primary-hover);
+        }
+
+        /* ─── Tables ─────────────────────────────────── */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13.5px;
+        }
+
+        th {
+            background: var(--black);
+            color: #ffffff;
+            padding: 13px 18px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(255, 107, 0, 0.4);
+        }
+
+        td {
+            padding: 11px 18px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-main);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) td {
+            background: #fafafa;
+        }
+
+        .method-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .method-get {
+            background: #ecfdf5;
+            color: #065f46;
+        }
+
+        .method-post {
+            background: var(--primary-tint);
+            color: var(--primary-hover);
+        }
+
+        .method-put {
+            background: #fffbeb;
+            color: #92400e;
+        }
+
+        .method-delete {
+            background: #fef2f2;
+            color: #991b1b;
+        }
+
+        /* ─── Step List ──────────────────────────────── */
+        .step-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .step-item {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 26px;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--black);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            border: 2px solid var(--primary);
+        }
+
+        .step-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 15.5px;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 5px;
+        }
+
+        .step-desc {
+            font-size: 13.5px;
+            color: var(--text-muted);
+        }
+
+        /* ─── Footer ─────────────────────────────────── */
+        .doc-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 28px 40px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+            background: var(--black);
+            color: #888;
+            margin-top: 60px;
+        }
+
+        /* ─── Verified badge ─────────────────────────── */
+        .badge-verified {
+            background: rgba(255, 107, 0, 0.15);
+            color: var(--primary);
+            border: 1px solid rgba(255, 107, 0, 0.3);
+            padding: 3px 9px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* ─── Responsive ─────────────────────────────── */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-wrapper {
+                margin-left: 0;
+            }
+
+            .toggle-mobile-menu {
+                display: block;
+            }
+
+            .content-area {
+                padding: 24px 20px;
+            }
+
+            .top-navbar {
+                padding: 0 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="brand-logo">
+                <i class="fa-solid fa-comments"></i>
+            </div>
+            <div class="brand-info">
+                <h2>Medians Chat</h2>
+                <span>Documentation v1.0.0</span>
+            </div>
+        </div>
+
+        <div class="search-box">
+            <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search documentation...">
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="nav-group-title">Getting Started</div>
+            <a href="#overview" class="nav-item active"><i class="fa-solid fa-house"></i> Overview & Features</a>
+            <a href="#requirements" class="nav-item"><i class="fa-solid fa-server"></i> System Requirements</a>
+            <a href="#installation" class="nav-item"><i class="fa-solid fa-download"></i> Installation Guide</a>
+            <a href="#credentials" class="nav-item"><i class="fa-solid fa-key"></i> Default Admin Credentials</a>
+
+            <div class="nav-group-title">Core Architecture</div>
+            <a href="#admin-panel" class="nav-item"><i class="fa-solid fa-gauge-high"></i> Admin Panel Guide</a>
+            <a href="#cms-sections" class="nav-item"><i class="fa-solid fa-cubes"></i> CMS Content Sections</a>
+            <a href="#system-settings" class="nav-item"><i class="fa-solid fa-gears"></i> System Settings</a>
+
+            <div class="nav-group-title">Developer & API</div>
+            <a href="#api-reference" class="nav-item"><i class="fa-solid fa-code"></i> REST API Reference</a>
+            <a href="#customization" class="nav-item"><i class="fa-solid fa-wand-magic-sparkles"></i> Customization
+                Guide</a>
+            <a href="#troubleshooting" class="nav-item"><i class="fa-solid fa-triangle-exclamation"></i> Troubleshooting
+                & FAQ</a>
+            <a href="#changelog" class="nav-item"><i class="fa-solid fa-clock-rotate-left"></i> Support & License</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <span>By Medians Tech</span>
+            <span class="badge-verified">Verified</span>
+        </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Top Navbar -->
+        <header class="top-navbar">
+            <button class="toggle-mobile-menu" id="toggleMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="top-nav-badges">
+                <span class="badge badge-black"><i class="fa-brands fa-laravel"></i> Laravel 12</span>
+                <span class="badge badge-black"><i class="fa-brands fa-react"></i> React 19 + Inertia</span>
+                <span class="badge badge-emerald"><i class="fa-solid fa-circle-check"></i> Verified</span>
+            </div>
+        </header>
+
+        <!-- Content Body -->
+        <main class="content-area">
+
+            <!-- Hero Banner -->
+            <div class="doc-hero">
+                <h1>Medians Chat <span>Documentation</span></h1>
+                <p>Complete step-by-step setup, configuration, CMS management, and developer reference guide for
+                    <strong style="color:#e0e0e0;">Medians Chat-mode Browsing Portfolio & AI CMS Script</strong>.
+                </p>
+                <div class="hero-meta">
+                    <div class="hero-meta-item"><i class="fa-solid fa-box"></i> Package: Portfolio Website
+                    </div>
+                    <div class="hero-meta-item"><i class="fa-solid fa-calendar"></i> Updated: September 2026</div>
+                    <div class="hero-meta-item"><i class="fa-solid fa-code-branch"></i> Version: 1.0.0</div>
+                </div>
+            </div>
+
+            <!-- Section 1: Overview & Features -->
+            <section id="overview" class="doc-section">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">Overview & Key Features</h2>
+                </div>
+                <p><strong>Medians Chat</strong> is an innovative, high-performance Laravel-backed interactive portfolio
+                    CMS. It seamlessly combines server-side dynamic Blade view rendering with a
+                    sleek Inertia.js + React 19 single-page application (SPA) admin dashboard.</p>
+
+                <div class="grid-3">
+                    <div class="feature-card">
+                        <div class="icon"><i class="fa-solid fa-comments"></i></div>
+                        <h3>Interactive Chat Engine</h3>
+                        <p>Driven by smart trigger matching logic and OpenAI completions to guide visitors interactively
+                            through portfolio flows.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon"><i class="fa-solid fa-sliders"></i></div>
+                        <h3>Inertia + React 19 Admin</h3>
+                        <p>Ultra-fast SPA admin interface powered by React 19, TypeScript, TanStack Query, and Lucide
+                            React icons.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon"><i class="fa-solid fa-layer-group"></i></div>
+                        <h3>Dynamic CMS Sections</h3>
+                        <p>Fully manage intro, about, skills, projects, clients, contact, CV, education, and hobbies via
+                            database JSON casts.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon"><i class="fa-solid fa-microphone"></i></div>
+                        <h3>Web Speech API</h3>
+                        <p>Built-in voice input speech recognition and browser-native Text-to-Speech (TTS) audio
+                            synthesis controller.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon"><i class="fa-solid fa-photo-film"></i></div>
+                        <h3>Media Library</h3>
+                        <p>Full upload manager with MIME validation, drag & drop uploads, security file checks, and
+                            instant previewing.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon"><i class="fa-solid fa-palette"></i></div>
+                        <h3>Multi-Theme Skins</h3>
+                        <p>Includes customizable CSS themes (Dark, Light, Custom accents) with a real-time skin selector
+                            widget.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Requirements -->
+            <section id="requirements" class="doc-section">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">System Requirements</h2>
+                </div>
+                <p>Ensure your hosting server meets the following software requirements before proceeding with
+                    installation:</p>
+
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <h3><i class="fa-solid fa-server" style="color:var(--primary);margin-right:7px;"></i> Server &
+                            Backend</h3>
+                        <ul
+                            style="padding-left:20px;font-size:13.5px;color:var(--text-muted);line-height:1.9;margin-top:10px;">
+                            <li><strong>PHP:</strong> ^8.2.4 (PHP 8.2 or 8.3 recommended)</li>
+                            <li><strong>Database:</strong> MySQL 8.0+ or MariaDB 10.4+</li>
+                            <li><strong>Web Server:</strong> Apache (with <code>mod_rewrite</code>) or Nginx</li>
+                            <li><strong>Composer:</strong> 2.x</li>
+                            <li><strong>Node.js:</strong> 18.x or 20.x + npm 9+</li>
+                        </ul>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fa-solid fa-puzzle-piece" style="color:var(--primary);margin-right:7px;"></i>
+                            Required PHP Extensions</h3>
+                        <ul
+                            style="padding-left:20px;font-size:13.5px;color:var(--text-muted);line-height:1.9;margin-top:10px;">
+                            <li><code>OpenSSL</code>, <code>PDO</code> & <code>PDO_MySQL</code></li>
+                            <li><code>Mbstring</code>, <code>Tokenizer</code>, <code>XML</code></li>
+                            <li><code>Ctype</code>, <code>JSON</code>, <code>BCMath</code></li>
+                            <li><code>Fileinfo</code>, <code>Zip</code>, <code>cURL</code></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <div><strong>Note for Shared Hosting (cPanel):</strong> Ensure PHP 8.2+ is enabled in <i>cPanel →
+                            Select PHP Version</i> and that <code>fileinfo</code> and <code>zip</code> extensions are
+                        active.</div>
+                </div>
+            </section>
+
+            <!-- Section 3: Installation -->
+            <section id="installation" class="doc-section">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">Step-by-Step Installation Guide</h2>
+                </div>
+
+                <h3 class="sub-heading"><i class="fa-solid fa-laptop-code"></i> Method A: Local Development (XAMPP /
+                    Laragon / Artisan)</h3>
+
+                <ol class="step-list">
+                    <li class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-title">Extract Files & Place Project</div>
+                        <div class="step-desc">Extract the downloaded package zip and copy the contents into your web
+                            root directory (e.g. <code>c:\xampp\htdocs\medians_chat</code> or Laragon
+                            <code>www/medians_chat</code>).
+                        </div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-title">Configure Environment (.env)</div>
+                        <div class="step-desc">Copy <code>.env.example</code> to <code>.env</code> and set your database
+                            connection details:</div>
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span>.env</span>
+                                <button class="copy-btn" onclick="copyCode(this)"><i class="fa-solid fa-copy"></i>
+                                    Copy</button>
+                            </div>
+                            <pre>APP_NAME="Medians Chat"
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=medians_chat
+DB_USERNAME=root
+DB_PASSWORD=
+
+</pre>
+                        </div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-title">Install PHP & Node Dependencies</div>
+                        <div class="step-desc">Open terminal in the project directory and run:</div>
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span>Terminal</span>
+                                <button class="copy-btn" onclick="copyCode(this)"><i class="fa-solid fa-copy"></i>
+                                    Copy</button>
+                            </div>
+                            <pre>composer install
+npm install</pre>
+                        </div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-title">Generate App Key & Seed Database</div>
+                        <div class="step-desc">Run the database migrations and default seeders to generate demo content
+                            and the default admin user:</div>
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span>Terminal</span>
+                                <button class="copy-btn" onclick="copyCode(this)"><i class="fa-solid fa-copy"></i>
+                                    Copy</button>
+                            </div>
+                            <pre>php artisan key:generate
+php artisan migrate --seed
+php artisan storage:link</pre>
+                        </div>
+                    </li>
+                    <li class="step-item">
+                        <div class="step-number">5</div>
+                        <div class="step-title">Compile Assets & Run Server</div>
+                        <div class="step-desc">Start Vite development server and Artisan server:</div>
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span>Terminal</span>
+                                <button class="copy-btn" onclick="copyCode(this)"><i class="fa-solid fa-copy"></i>
+                                    Copy</button>
+                            </div>
+                            <pre>npm run dev
+php artisan serve</pre>
+                        </div>
+                        <div class="step-desc" style="margin-top:8px;">Access the application at
+                            <code>http://127.0.0.1:8000</code>.
+                        </div>
+                    </li>
+                </ol>
+
+                <h3 class="sub-heading"><i class="fa-solid fa-cloud-arrow-up"></i> Method B: Production Deployment
+                    (cPanel / VPS)</h3>
+
+                <div class="alert alert-warning">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div><strong>Document Root Setup:</strong> Your domain or subdomain must point directly to the
+                        <code>/public</code> directory of the script for security and routing to function correctly.
+                    </div>
+                </div>
+
+                <ul style="padding-left:20px;font-size:14px;color:var(--text-muted);line-height:2;">
+                    <li>1. Upload all script files to your server directory (e.g.
+                        <code>public_html/medians_chat</code>).
+                    </li>
+                    <li>2. Set your web server domain document root to <code>public_html/medians_chat/public</code>.
+                    </li>
+                    <li>3. Create a MySQL database and user via cPanel MySQL Wizard.</li>
+                    <li>4. Update your <code>.env</code> file with production database details,
+                        <code>APP_ENV=production</code>, <code>APP_DEBUG=false</code>, and your live
+                        <code>APP_URL=https://yourdomain.com</code>.
+                    </li>
+                    <li>5. Run <code>npm run build</code> locally and upload the generated <code>public/build</code>
+                        folder if compiling on your machine.</li>
+                    <li>6. Set write permissions (775 or 777) on <code>storage</code> and <code>bootstrap/cache</code>
+                        directories.</li>
+                </ul>
+            </section>
+
+            <!-- Section 4: Credentials -->
+            <section id="credentials" class="doc-section">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">Default Admin Credentials</h2>
+                </div>
+
+                <p>After seeding the database with <code>php artisan db:seed</code>, use the following credentials to
+                    access the admin management portal:</p>
+
+                <div class="grid-2">
+                    <div class="feature-card" style="border-color:rgba(255,107,0,0.3);">
+                        <h3><i class="fa-solid fa-lock" style="color:var(--primary);margin-right:7px;"></i> Admin Access
+                            URL</h3>
+                        <p style="margin-bottom:12px;font-size:13px;color:var(--text-muted);">Navigating to either path
+                            will open the login page:</p>
+                        <code
+                            style="font-size:13.5px;display:block;padding:8px;margin-bottom:6px;">https://yourdomain.com/login</code>
+                        <code style="font-size:13.5px;display:block;padding:8px;">https://yourdomain.com/admin</code>
+                    </div>
+                    <div class="feature-card" style="border-color:rgba(255,107,0,0.3);">
+                        <h3><i class="fa-solid fa-user-shield" style="color:var(--primary);margin-right:7px;"></i> Login
+                            Credentials</h3>
+                        <table style="width:100%;margin-top:10px;">
+                            <tr>
+                                <td style="padding:7px 0;font-weight:600;color:var(--text-heading);">Email:</td>
+                                <td style="padding:7px 0;"><code>admin@medians.tech</code></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:7px 0;font-weight:600;color:var(--text-heading);">Password:</td>
+                                <td style="padding:7px 0;"><code>Medians123</code></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <div><strong>Security Recommendation:</strong> Immediately log in and update your email and password
+                        under <i>Admin Dashboard → Users → Edit User / Change Password</i>.</div>
+                </div>
+            </section>
+
+            <!-- Section 5: Admin Panel -->
+            <section id="admin-panel" class="doc-section">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <h2 class="section-title">Admin Panel Guide & Features</h2>
+                </div>
+
+                <p>The admin panel is built with <strong>Inertia.js + React 19</strong>, providing instant page switches
+                    without full browser reloads.</p>
+
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <h3><i class="fa-solid fa-chart-line" style="color:var(--primary);margin-right:7px;"></i>
+                            Dashboard & Analytics</h3>
+                        <p>View total user message count, popular chat prompts chart, contact submission activity,
+                            recent file uploads, and system status indicators.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fa-solid fa-sliders" style="color:var(--primary);margin-right:7px;"></i> Content
+                            Manager</h3>
+                        <p>Manage all portfolio view content sections dynamically. Edit text titles, bios, skills
+                            ratings, portfolio items (with images/videos), client logos, contact details, and custom
+                            flow buttons.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fa-solid fa-envelope-open-text"
+                                style="color:var(--primary);margin-right:7px;"></i> Form Messages</h3>
+                        <p>Review contact form submissions sent by visitors. Filter by status (new, pending, resolved),
+                            view sender info, and manage inbox status.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fa-solid fa-comments" style="color:var(--primary);margin-right:7px;"></i> User
+                            Messages Log</h3>
+                        <p>Analyze interactive user prompts sent via the frontend chat input. Features prompt frequency
+                            counts, popular prompt statistics, and soft-delete/restore capabilities.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fa-solid fa-photo-film" style="color:var(--primary);margin-right:7px;"></i> Media
+                            Library</h3>
+                        <p>Upload images, banners, and documents. Supports drag-and-drop uploads, instant copy of
+                            storage URLs for CMS section inputs, and secure deletion.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fa-solid fa-gears" style="color:var(--primary);margin-right:7px;"></i> System
+                            Settings</h3>
+                        <p>Configure global application name, contact email and theme defaults.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: CMS -->
+            <section id="cms-sections" class="doc-section">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <h2 class="section-title">CMS Content Sections Architecture</h2>
+                </div>
+
+                <p>The application employs a dynamic, JSON-driven CMS architecture. All section content is stored in the
+                    <code>content_sections</code> database table (using <code>section_key</code> as the primary key and
+                    a JSON cast <code>data</code> column), managed by <code>App\Services\ContentService</code>, and
+                    delivered via REST endpoints or server-side Blade view binding in <code>HomeController</code>.
+                </p>
+
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <h3><i class="fa-solid fa-database" style="color:var(--primary);margin-right:7px;"></i> Database
+                            Storage & Model</h3>
+                        <p>Driven by the <code>ContentSection</code> Eloquent model
+                            (<code>app/Models/ContentSection.php</code>). The <code>data</code> attribute is
+                            automatically cast to a native PHP array/JSON object.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fa-solid fa-code-branch" style="color:var(--primary);margin-right:7px;"></i>
+                            Service & Controller Layer</h3>
+                        <p><code>ContentService</code> handles all data retrieval and updates, consumed by
+                            <code>ContentController</code> for admin REST API calls and <code>HomeController</code> for
+                            initial view data.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fa-solid fa-cubes" style="color:var(--primary);margin-right:7px;"></i> Master
+                            Blade Component Engine</h3>
+                        <p>All chat flows and content sections are rendered dynamically using a single master layout
+                            engine: <code>resources/views/sections/index.blade.php</code>.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fa-solid fa-desktop" style="color:var(--primary);margin-right:7px;"></i> React SPA
+                            Admin Editors</h3>
+                        <p>Built with Inertia.js + React 19 in
+                            <code>resources/js/src/pages/admin/content/sections/</code> for intuitive, real-time section
+                            content editing.
+                        </p>
+                    </div>
+                </div>
+
+                <h3 class="sub-heading"><i class="fa-solid fa-layer-group"></i> Modular Blade Components
+                    (<code>resources/views/sections/components/</code>)</h3>
+                <p>Rather than separate rigid templates for each flow, section data dynamically binds to specialized
+                    presentation components:</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Component File</th>
+                                <th>Target Section Data</th>
+                                <th>Rendered Content & Features</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>intro_screen.blade.php</code></td>
+                                <td><code>intro</code></td>
+                                <td>Hero banner greeting, developer title, profile avatar photo, client/testimonial
+                                    Summary & slogan, hero call-to-action buttons.</td>
+                            </tr>
+                            <tr>
+                                <td><code>blocks.blade.php</code></td>
+                                <td><code>blocks</code></td>
+                                <td>Flexible block renderer supporting paragraphs (<code>P</code>), unordered lists
+                                    (<code>UL</code>), and icon lists (<code>DIV.list-with-icons</code>).</td>
+                            </tr>
+                            <tr>
+                                <td><code>stats.blade.php</code></td>
+                                <td><code>stats</code></td>
+                                <td>Metric stats grid featuring FontAwesome icons and text labels (e.g. Years of
+                                    Experience, Projects Completed).</td>
+                            </tr>
+                            <tr>
+                                <td><code>skills.blade.php</code></td>
+                                <td><code>categories</code></td>
+                                <td>Grouped tech categories (Frontend, Backend, DevOps) with technology names and 1–5
+                                    star rating indicators.</td>
+                            </tr>
+                            <tr>
+                                <td><code>gallery.blade.php</code></td>
+                                <td><code>items</code> (Projects)</td>
+                                <td>Portfolio grid supporting 4 media types: <code>image</code>, <code>gallery</code>
+                                    popup slides, <code>youtube</code> video modal, and <code>video</code> (MP4).</td>
+                            </tr>
+                            <tr>
+                                <td><code>clients.blade.php</code></td>
+                                <td><code>items</code> (Clients)</td>
+                                <td>Brand partner grid featuring client logo image URLs and external website link
+                                    references.</td>
+                            </tr>
+                            <tr>
+                                <td><code>direct_contact.blade.php</code></td>
+                                <td><code>directContact</code></td>
+                                <td>Direct communication channels including Email address and WhatsApp/Phone contact
+                                    entries with icons.</td>
+                            </tr>
+                            <tr>
+                                <td><code>social_links.blade.php</code></td>
+                                <td><code>socialLinks</code></td>
+                                <td>Social profile badge links (LinkedIn, GitHub, Facebook, Twitter/X, Instagram) with
+                                    platform brand icons.</td>
+                            </tr>
+                            <tr>
+                                <td><code>options_list.blade.php</code> / <code>buttons.blade.php</code></td>
+                                <td><code>buttons</code>, <code>globalButtons</code>, <code>finalButtons</code></td>
+                                <td>Interactive chat navigation chips, quick-trigger choices, link buttons, and flow
+                                    navigation controls.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="sub-heading"><i class="fa-solid fa-key"></i> System Content Section Keys
+                    (<code>content_sections</code>)</h3>
+                <p>Complete dictionary of default section keys seeded in <code>PersonalContentSeeder</code>:</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Section Key</th>
+                                <th>JSON Schema Attributes</th>
+                                <th>Description & UI Flow Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>intro</code></td>
+                                <td><code>greeting</code>, <code>name</code>, <code>title</code>, <code>imageUrl</code>,
+                                    <code>imageAlt</code>, <code>heroSummaryText</code>, <code>heroSummaryAuthor</code>,
+                                    <code>buttons</code>
+                                </td>
+                                <td>Initial hero section with developer profile, testimonial Summary card, and primary
+                                    CTAs.</td>
+                            </tr>
+                            <tr>
+                                <td><code>about</code></td>
+                                <td><code>bio</code>, <code>stats</code>, <code>buttons</code>, <code>triggers</code>
+                                </td>
+                                <td>Personal background narrative, key experience statistics, and conversational trigger
+                                    keywords.</td>
+                            </tr>
+                            <tr>
+                                <td><code>skills</code></td>
+                                <td><code>intro</code>, <code>categories</code>, <code>buttons</code>,
+                                    <code>triggers</code>
+                                </td>
+                                <td>Technical skill categories with star ratings (1-5), CV download button, and trigger
+                                    matching keywords.</td>
+                            </tr>
+                            <tr>
+                                <td><code>projects</code></td>
+                                <td><code>intro</code>, <code>items</code> (media items), <code>globalButtons</code>,
+                                    <code>finalButtons</code>, <code>triggers</code>
+                                </td>
+                                <td>Interactive portfolio showcase supporting images, image galleries, YouTube embeds,
+                                    and MP4 videos.</td>
+                            </tr>
+                            <tr>
+                                <td><code>clients</code></td>
+                                <td><code>intro</code>, <code>items</code> (brand logos), <code>buttons</code>,
+                                    <code>triggers</code>
+                                </td>
+                                <td>Client and brand logo showcase with quick navigation buttons.</td>
+                            </tr>
+                            <tr>
+                                <td><code>contact</code></td>
+                                <td><code>intro</code>, <code>directContact</code>, <code>socialLinks</code>,
+                                    <code>buttons</code>, <code>triggers</code>
+                                </td>
+                                <td>Contact details (Email, Phone/WhatsApp), social channels, and direct contact form
+                                    modal opener.</td>
+                            </tr>
+                            <tr>
+                                <td><code>hello</code> (greeting)</td>
+                                <td><code>blocks</code>, <code>buttons</code>, <code>triggers</code></td>
+                                <td>Welcome message displayed upon opening the chat interface with quick action prompt
+                                    suggestions.</td>
+                            </tr>
+                            <tr>
+                                <td><code>hobbies</code></td>
+                                <td><code>blocks</code> (icon list), <code>buttons</code>, <code>triggers</code></td>
+                                <td>Personal leisure interests (Photography, Traveling, Fitness, Gaming, Music,
+                                    Football) with icons.</td>
+                            </tr>
+                            <tr>
+                                <td><code>age</code> / <code>education</code> / <code>experience</code> /
+                                    <code>awards</code>
+                                </td>
+                                <td><code>blocks</code>, <code>buttons</code>, <code>triggers</code></td>
+                                <td>Informational flow responses for visitor questions regarding age, university
+                                    degrees, work history, and certifications.</td>
+                            </tr>
+                            <tr>
+                                <td><code>cv</code></td>
+                                <td><code>blocks</code>, <code>buttons</code> (CV PDF link), <code>triggers</code></td>
+                                <td>Curriculum Vitae download flow providing direct PDF file download link.</td>
+                            </tr>
+                            <tr>
+                                <td><code>msg_success</code></td>
+                                <td><code>blocks</code>, <code>buttons</code></td>
+                                <td>Automated bot response displayed after visitor successfully sends a message through
+                                    the contact form.</td>
+                            </tr>
+                            <tr>
+                                <td><code>error</code></td>
+                                <td><code>blocks</code>, <code>buttons</code></td>
+                                <td>Fallback response when visitor enters an unrecognized prompt, suggesting supported
+                                    keywords.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="sub-heading"><i class="fa-solid fa-pen-to-square"></i> React Admin Section Editors</h3>
+                <p>Located in <code>resources/js/src/pages/admin/content/sections/</code>, providing tailored UI editors
+                    for each section type:</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Admin Editor Component</th>
+                                <th>Target Section Key</th>
+                                <th>Editable Content Features</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>IntroEditor.tsx</code></td>
+                                <td><code>intro</code></td>
+                                <td>Edit developer greeting, name, title, avatar image URL, Summary, Summary slogan, and
+                                    hero buttons.</td>
+                            </tr>
+                            <tr>
+                                <td><code>AboutEditor.tsx</code></td>
+                                <td><code>about</code></td>
+                                <td>Rich text bio editor, dynamic add/remove stat cards with FontAwesome icon selector,
+                                    and flow buttons.</td>
+                            </tr>
+                            <tr>
+                                <td><code>SkillsEditor.tsx</code></td>
+                                <td><code>skills</code></td>
+                                <td>Manage tech categories, add/remove skills, set 1-5 star ratings, and update CV
+                                    download PDF URL.</td>
+                            </tr>
+                            <tr>
+                                <td><code>ProjectsEditor.tsx</code> / <code>ServicesEditor.tsx</code></td>
+                                <td><code>projects</code></td>
+                                <td>Manage portfolio items grid, select media type (Image, Gallery, YouTube, Video), set
+                                    video URLs/IDs, and configure global/final navigation buttons.</td>
+                            </tr>
+                            <tr>
+                                <td><code>ClientsEditor.tsx</code></td>
+                                <td><code>clients</code></td>
+                                <td>Add/remove brand partner names and upload/paste brand logo URLs.</td>
+                            </tr>
+                            <tr>
+                                <td><code>ContactEditor.tsx</code></td>
+                                <td><code>contact</code></td>
+                                <td>Manage direct contact items (email, phone), social media profile links, and contact
+                                    form modal trigger buttons.</td>
+                            </tr>
+                            <tr>
+                                <td><code>GenericFlowEditor.tsx</code></td>
+                                <td><code>hello</code>, <code>hobbies</code>, <code>age</code>, <code>cv</code>,
+                                    <code>education</code>, <code>experience</code>, <code>awards</code>, etc.
+                                </td>
+                                <td>Universal block-based editor to add/edit paragraphs, bullet lists, icon lists,
+                                    action buttons, and trigger keywords for custom flows.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+
+            <!-- Section 7: System Settings -->
+            <section id="system-settings" class="doc-section">
+                <div class="section-header">
+                    <div class="section-number">7</div>
+                    <h2 class="section-title">System & AI Settings Architecture</h2>
+                </div>
+
+                <p><strong>Medians Chat</strong> features a centralized configuration engine that stores system-wide
+                    settings, AI integration keys, security configurations, and mail parameters in the
+                    <code>settings</code> database table. Config entries are retrieved with high-performance Laravel
+                    caching, managed through the <strong>SettingService</strong>, and edited interactively in the
+                    Inertia + React 19 SPA dashboard via <strong>GeneralSettingPage</strong>.
+                </p>
+
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <h3><i class="fa-solid fa-database" style="color:var(--primary);margin-right:7px;"></i> Database
+                            Model (<code>Setting.php</code>)</h3>
+                        <p>Driven by <code>App\Models\Setting</code>. Columns include <code>group</code>,
+                            <code>key</code>, <code>label</code>, <code>value</code>, <code>type</code>,
+                            <code>options</code>, <code>description</code>, <code>is_public</code>,
+                            <code>is_encrypted</code>, and <code>sort_order</code>. Values are dynamically cast
+                            (boolean, integer, json, string) and encrypted using Laravel <code>Crypt</code> when marked
+                            encrypted.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fa-solid fa-server" style="color:var(--primary);margin-right:7px;"></i> Service
+                            Layer (<code>SettingService.php</code>)</h3>
+                        <p>Encapsulates setting access, grouping (<code>getGrouped()</code>, <code>getGroup()</code>),
+                            type validation (<code>validateValue()</code>), and bulk updates
+                            (<code>bulkUpdate()</code>). Flushes settings cache automatically upon mutation.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fa-brands fa-react" style="color:var(--primary);margin-right:7px;"></i> React SPA
+                            Editor (<code>GeneralSettingPage.tsx</code>)</h3>
+                        <p>Tabbed settings management SPA built with React 19 and TypeScript. Features specialized input
+                            controls (<code>SettingField</code>) for toggles, select menus, textareas, media pickers,
+                            and number inputs with instant save feedback.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fa-solid fa-bolt" style="color:var(--primary);margin-right:7px;"></i> Forever
+                            Caching Strategy</h3>
+                        <p>Utilizes <code>Cache::rememberForever</code> for key lookups (<code>setting:{key}</code> and
+                            <code>settings:all</code>). Eliminates repetitive database queries on high-traffic frontend
+                            user prompts and system calls.
+                        </p>
+                    </div>
+                </div>
+
+                <h3 class="sub-heading"><i class="fa-solid fa-layer-group"></i> Configuration Groups Dictionary</h3>
+                <p>System settings are logically partitioned into functional groups across the admin interface:</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Group Key</th>
+                                <th>Group Icon</th>
+                                <th>Setting Examples</th>
+                                <th>Description & Functionality</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>general</code></td>
+                                <td><i class="fa-solid fa-sliders" style="color:var(--primary);"></i> General</td>
+                                <td><code>app_name</code>, <code>app_url</code>, <code>timezone</code>,
+                                    <code>maintenance_mode</code>
+                                </td>
+                                <td>Core application identity, site URL routing, local timezone format, and global
+                                    maintenance toggle.</td>
+                            </tr>
+                            <tr>
+                                <td><code>seo</code></td>
+                                <td><i class="fa-solid fa-magnifying-glass" style="color:var(--primary);"></i> SEO</td>
+                                <td><code>site_title</code>, <code>meta_description</code>, <code>meta_keywords</code>,
+                                    <code>og_image</code>
+                                </td>
+                                <td>Default search engine meta tags, OpenGraph sharing image, and site title formatting.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>email</code></td>
+                                <td><i class="fa-solid fa-envelope" style="color:var(--primary);"></i> Email</td>
+                                <td><code>mail_from_name</code>, <code>mail_from_address</code>, <code>smtp_host</code>,
+                                    <code>smtp_port</code>
+                                </td>
+                                <td>Outbound email transport credentials, system sender identity, and SMTP gateway
+                                    options.</td>
+                            </tr>
+                            <tr>
+                                <td><code>security</code></td>
+                                <td><i class="fa-solid fa-shield-halved" style="color:var(--primary);"></i> Security
+                                </td>
+                                <td><code>two_factor_auth</code>, <code>session_lifetime</code>,
+                                    <code>ip_allowlist</code>
+                                </td>
+                                <td>Session timeout duration, optional 2FA enforcement, and admin IP restriction
+                                    boundaries.</td>
+                            </tr>
+                            <tr>
+                                <td><code>notifications</code></td>
+                                <td><i class="fa-solid fa-bell" style="color:var(--primary);"></i> Notifications</td>
+                                <td><code>admin_email</code>, <code>email_alerts</code>, <code>slack_webhook</code></td>
+                                <td>System event notifications, contact form submission alerts, and external webhook
+                                    integrations.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="sub-heading"><i class="fa-solid fa-sliders"></i> Supported Setting Data Types & Controls</h3>
+                <p>Each setting in the database specifies a <code>type</code> attribute which controls validation and UI
+                    input rendering:</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type Slug</th>
+                                <th>Rendered React Component</th>
+                                <th>Storage / Casting</th>
+                                <th>Example Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>boolean</code></td>
+                                <td>Toggle Slider Switch</td>
+                                <td><code>1</code> or <code>0</code> (Cast to boolean)</td>
+                                <td><code>maintenance_mode</code>, <code>email_alerts</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>text</code></td>
+                                <td>Standard Text Input</td>
+                                <td>String value</td>
+                                <td><code>app_name</code>, <code>smtp_host</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>integer</code></td>
+                                <td>Numeric Input</td>
+                                <td>Integer value</td>
+                                <td><code>session_lifetime</code>, <code>smtp_port</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>select</code></td>
+                                <td>Dropdown Select Menu</td>
+                                <td>String (validated against <code>options</code> array)</td>
+                                <td><code>mail_driver</code>, <code>ai_model</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>textarea</code></td>
+                                <td>Multi-line Textarea</td>
+                                <td>Long String</td>
+                                <td><code>meta_description</code>, <code>system_prompt</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>file</code></td>
+                                <td><code>MediaPickerInput</code> Modal</td>
+                                <td>Media asset URL path</td>
+                                <td><code>site_logo</code>, <code>og_image</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="sub-heading"><i class="fa-solid fa-code"></i> Developer Code Examples</h3>
+
+                <p><strong>1. Accessing Settings in PHP Backend:</strong></p>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>Backend Controller / Service</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-solid fa-copy"></i> Copy</button>
+                    </div>
+                    <pre>use App\Models\Setting;
+
+// Retrieve setting with fallback
+$appName = Setting::getValue('app_name', 'Medians Chat');
+
+// Programmatically update a setting and clear cache
+Setting::setValue('maintenance_mode', false);</pre>
+                </div>
+
+                <p><strong>2. Bulk Updating Settings via REST API:</strong></p>
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>PUT /api/v1/settings</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-solid fa-copy"></i> Copy</button>
+                    </div>
+                    <pre>{
+    "app_name": "Medians Interactive Portfolio",
+    "site_title": "Medians Chat - AI Portfolio",
+    "maintenance_mode": false
+}</pre>
+                </div>
+            </section>
+
+
+            <!-- Section 8: API -->
+            <section id="api-reference" class="doc-section">
+                <div class="section-header">
+                    <div class="section-number">8</div>
+                    <h2 class="section-title">REST API Reference</h2>
+                </div>
+
+                <p>The application provides JSON REST API endpoints under the <code>/api/v1</code> prefix:</p>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Endpoint Route</th>
+                                <th>Access</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Public Routes -->
+                            <tr>
+                                <td><span class="method-tag method-get">GET</span></td>
+                                <td><code>/api/v1/content</code></td>
+                                <td>Public</td>
+                                <td>Returns all CMS section data objects key-mapped by section_key.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-get">GET</span></td>
+                                <td><code>/api/v1/content/{key}</code></td>
+                                <td>Public</td>
+                                <td>Returns content JSON object for a specific section key (e.g. <code>about</code>).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-get">GET</span></td>
+                                <td><code>/api/v1/home-menus</code></td>
+                                <td>Public</td>
+                                <td>Fetch active homepage navigation menu items.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-get">GET</span></td>
+                                <td><code>/api/v1/active-menu</code></td>
+                                <td>Public</td>
+                                <td>Fetch current active menu configuration.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-post">POST</span></td>
+                                <td><code>/api/v1/send-prompt</code></td>
+                                <td>Public</td>
+                                <td>Store interactive chat prompt sent by visitor.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-post">POST</span></td>
+                                <td><code>/api/v1/send-message</code></td>
+                                <td>Public</td>
+                                <td>Submit visitor contact form message.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-post">POST</span></td>
+                                <td><code>/api/v1/auth/login</code></td>
+                                <td>Public</td>
+                                <td>Authenticate admin user and issue session token.</td>
+                            </tr>
+                            <!-- Auth Admin Routes -->
+                            <tr>
+                                <td><span class="method-tag method-get">GET</span></td>
+                                <td><code>/api/v1/dashboard/stats</code></td>
+                                <td>Auth Admin</td>
+                                <td>Fetch system metrics, prompt analytics, and recent activity.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-put">PUT</span></td>
+                                <td><code>/api/v1/content/{key}</code></td>
+                                <td>Auth Admin</td>
+                                <td>Update JSON data content of a CMS section.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-get">GET</span></td>
+                                <td><code>/api/v1/user-messages</code></td>
+                                <td>Auth Admin</td>
+                                <td>List visitor chat prompts with pagination and search.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-get">GET</span></td>
+                                <td><code>/api/v1/user-messages/popular</code></td>
+                                <td>Auth Admin</td>
+                                <td>Fetch top/most popular visitor chat prompts for hero analytics.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-delete">DELETE</span></td>
+                                <td><code>/api/v1/user-messages/{id}</code></td>
+                                <td>Auth Admin</td>
+                                <td>Soft-delete user message prompt entry.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-post">POST</span></td>
+                                <td><code>/api/v1/user-messages/{id}/restore</code></td>
+                                <td>Auth Admin</td>
+                                <td>Restore soft-deleted user message entry.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-get">GET</span></td>
+                                <td><code>/api/v1/form-messages</code></td>
+                                <td>Auth Admin</td>
+                                <td>List contact form submissions with status filter badges.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-put">PATCH</span></td>
+                                <td><code>/api/v1/form-messages/{id}/status</code></td>
+                                <td>Auth Admin</td>
+                                <td>Update contact form message status (<code>new</code>, <code>pending</code>,
+                                    <code>resolved</code>).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-delete">DELETE</span></td>
+                                <td><code>/api/v1/form-messages/{id}</code></td>
+                                <td>Auth Admin</td>
+                                <td>Delete contact form message entry.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-get">GET</span></td>
+                                <td><code>/api/v1/files</code></td>
+                                <td>Auth Admin</td>
+                                <td>List media library files and documents.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-post">POST</span></td>
+                                <td><code>/api/v1/files/upload</code></td>
+                                <td>Auth Admin</td>
+                                <td>Upload image or document with MIME security validation.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-delete">DELETE</span></td>
+                                <td><code>/api/v1/files</code></td>
+                                <td>Auth Admin</td>
+                                <td>Delete file from storage and media library.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-get">GET</span></td>
+                                <td><code>/api/v1/users</code></td>
+                                <td>Auth Admin</td>
+                                <td>List system admin users and permissions.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-post">POST</span></td>
+                                <td><code>/api/v1/users</code></td>
+                                <td>Auth Admin</td>
+                                <td>Create new admin user account.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-put">PUT</span></td>
+                                <td><code>/api/v1/users/{id}</code></td>
+                                <td>Auth Admin</td>
+                                <td>Update user profile details, role, or active status.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-put">PUT</span></td>
+                                <td><code>/api/v1/users/{id}/password</code></td>
+                                <td>Auth Admin</td>
+                                <td>Reset user security password.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-get">GET</span></td>
+                                <td><code>/api/v1/settings</code></td>
+                                <td>Auth Admin</td>
+                                <td>Fetch all application system settings grouped.</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-tag method-put">PUT</span></td>
+                                <td><code>/api/v1/settings</code></td>
+                                <td>Auth Admin</td>
+                                <td>Bulk update system & AI settings key-value payload.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 9: Customization -->
+            <section id="customization" class="doc-section">
+                <div class="section-header">
+                    <div class="section-number">9</div>
+                    <h2 class="section-title">Customization & Developer Guide</h2>
+                </div>
+
+                <h3 class="sub-heading"><i class="fa-solid fa-paintbrush"></i> Customizing Themes & CSS Skins</h3>
+                <p>Theme skins are defined in <code>public/assets/css/skins/</code> and controlled by the skin switcher
+                    widget (<code>resources/views/sections/color-switcher.blade.php</code>). You can edit primary CSS
+                    accent variables in your stylesheet:</p>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>public/assets/css/skins/theme-dark.css</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-solid fa-copy"></i> Copy</button>
+                    </div>
+                    <pre>:root {
+    --primary-color: #6366f1;
+    --secondary-color: #ec4899;
+    --accent-color: #06b6d4;
+    --bg-dark: #0f172a;
+    --text-primary: #f8fafc;
+}</pre>
+                </div>
+
+                <h3 class="sub-heading"><i class="fa-brands fa-react"></i> Rebuilding Admin React SPA Components</h3>
+                <p>Admin React pages are located in <code>resources/js/src/pages/</code>. When making code updates to
+                    React pages or TypeScript hooks, recompile Vite bundle assets:</p>
+
+                <div class="code-container">
+                    <div class="code-header">
+                        <span>Terminal</span>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-solid fa-copy"></i> Copy</button>
+                    </div>
+                    <pre># Production build
+npm run build
+
+# Development watch mode
+npm run dev</pre>
+                </div>
+            </section>
+
+            <!-- Section 10: Troubleshooting -->
+            <section id="troubleshooting" class="doc-section">
+                <div class="section-header">
+                    <div class="section-number">10</div>
+                    <h2 class="section-title">Troubleshooting & FAQ</h2>
+                </div>
+
+                <div class="feature-card" style="margin-bottom:14px;">
+                    <h3>Q: I get a "500 Internal Server Error" after uploading to cPanel.</h3>
+                    <p style="margin-top:6px;"><strong>Fix:</strong> Ensure your <code>.env</code> file exists, run
+                        <code>php artisan key:generate</code>, and make sure <code>storage</code> and
+                        <code>bootstrap/cache</code> folders have <code>775</code> permissions.
+                    </p>
+                </div>
+                <div class="feature-card" style="margin-bottom:14px;">
+                    <h3>Q: Admin routes return a 404 error on page refresh.</h3>
+                    <p style="margin-top:6px;"><strong>Fix:</strong> Verify Apache <code>mod_rewrite</code> is enabled
+                        and <code>public/.htaccess</code> is present. On Nginx, ensure your config includes
+                        <code>try_files $uri $uri/ /index.php?$query_string;</code>.
+                    </p>
+                </div>
+                <div class="feature-card" style="margin-bottom:14px;">
+                    <h3>Q: Uploaded project portfolio images are not showing.</h3>
+                    <p style="margin-top:6px;"><strong>Fix:</strong> Run <code>php artisan storage:link</code> in your
+                        terminal to create the public storage shortcut link.</p>
+                </div>
+            </section>
+
+            <!-- Section 11: Support -->
+            <section id="changelog" class="doc-section">
+                <div class="section-header">
+                    <div class="section-number">11</div>
+                    <h2 class="section-title">Support & License Information</h2>
+                </div>
+
+                <p>Thank you for purchasing <strong>Medians Chat</strong>! If you have any questions, encounter bugs, or
+                    need customization support, feel free to reach out through our CodeCanyon profile support page.</p>
+
+                <div class="alert alert-info" style="margin-top:20px;">
+                    <i class="fa-solid fa-headset"></i>
+                    <div>
+                        <strong>Item Support Channels:</strong><br>
+                        Support Email: <a href="mailto:support@medians.tech"
+                            style="color:var(--primary-hover);font-weight:600;">support@medians.tech</a><br>
+                        Envato Profile: <a href="https://codecanyon.net/user/medians" target="_blank"
+                            style="color:var(--primary-hover);font-weight:600;">CodeCanyon Medians Profile</a>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="doc-footer">
+            <p>&copy; 2026 Medians Tech. All rights reserved. Created for CodeCanyon item deployment.</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Sidebar active link highlighter on scroll
+        const sections = document.querySelectorAll('.doc-section');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                if (pageYOffset >= section.offsetTop - 120) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Search filtering
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('keyup', (e) => {
+            const term = e.target.value.toLowerCase();
+            navItems.forEach(item => {
+                item.style.display = item.textContent.toLowerCase().includes(term) ? 'flex' : 'none';
+            });
+        });
+
+        // Mobile menu toggle
+        const sidebar = document.getElementById('sidebar');
+        document.getElementById('toggleMenuBtn').addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+        });
+
+        // Copy button
+        function copyCode(btn) {
+            const codeBlock = btn.parentElement.nextElementSibling;
+            navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                const orig = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                btn.style.background = '#16a34a';
+                btn.style.color = 'white';
+                setTimeout(() => {
+                    btn.innerHTML = orig;
+                    btn.style.background = '';
+                    btn.style.color = '';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+
+</html>
