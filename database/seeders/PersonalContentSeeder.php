@@ -571,28 +571,28 @@ class PersonalContentSeeder extends Seeder
             'items' => [
                 [
                     'link'      => 'https://link-to-your-website.com',
-                    'image'     => 'img/services/project-1.jpg',
+                    'image'     => 'img/services/service-1.jpg',
                     'mediaType' => 'gallery',
                     'gallery'   => [
-                        'img/projects/project-1-big.jpg',
-                        'img/projects/project-2-big.jpg',
-                        'img/projects/project-3-big.jpg',
+                        'img/services/service-1-big.jpg',
+                        'img/services/service-2-big.jpg',
+                        'img/services/service-3-big.jpg',
                     ],
                 ],
                 [
                     'link'      => 'https://link-to-your-website.com',
-                    'image'     => 'img/projects/project-2.jpg',
+                    'image'     => 'img/services/service-2.jpg',
                     'mediaType' => 'youtube',
                     'youtubeId' => 'SjJhuZQlkbA',
                 ],
                 [
                     'link'      => '',
-                    'image'     => 'img/projects/project-3.jpg',
+                    'image'     => 'img/services/service-3.jpg',
                     'mediaType' => 'image',
                 ],
                 [
                     'link'      => 'https://link-to-your-website.com',
-                    'image'     => 'img/projects/project-4.jpg',
+                    'image'     => 'img/services/service-4.jpg',
                     'mediaType' => 'video',
                     'videoUrl'  => 'img/video.mp4',
                 ],
