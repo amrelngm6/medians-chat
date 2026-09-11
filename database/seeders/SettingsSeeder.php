@@ -25,7 +25,7 @@ class SettingsSeeder extends Seeder
                 'group'       => 'general',
                 'key'         => 'general.theme_color',
                 'label'       => 'Theme color',
-                'value'       => 'theme-dark',
+                'value'       => 'theme-orange',
                 'type'        => 'select',
                 'options'     => json_encode(['theme-red', 'theme-teal', 'theme-gold', 'theme-cyan', 'theme-blue', 'theme-violet', 'theme-pink', 'theme-green', 'theme-orange', 'theme-dark', 'multicolors']),
                 'description' => 'Set the website default theme colors',
