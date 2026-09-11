@@ -8,7 +8,6 @@
             <p>Select Skin</p>
             <div class="theme-grid">
                 <img class="skin-btn" data-file="multicolors.css" src="/img/styleswitcher/multicolors.png" alt="Multicolors 1">
-                <img class="skin-btn" data-file="multicolors2.css" src="/img/styleswitcher/multicolors2.png" alt="Multicolors 2">
                 <img class="skin-btn skin-btn-dark" data-file="theme-dark.css" src="/img/styleswitcher/theme-dark-dark.png" alt="">
                 <button class="skin-btn theme-violet" data-file="theme-violet.css"></button>
                 <button class="skin-btn theme-teal" data-file="theme-teal.css"></button>
