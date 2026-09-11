@@ -513,7 +513,7 @@ const startConversationFlow = async (flowKey) => {
             }
             await new Promise((resolve) => setTimeout(resolve, 200));
           }
-          renderOptions(contentFlow.options, '', false);
+          renderOptions(contentFlow.options, msgElement, false);
 
         } else if (!contentFlow.isRich) {
           await typeWriterEffect(msgBubble, contentFlow.text);
