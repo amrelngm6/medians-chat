@@ -12,7 +12,7 @@ class ContentSection extends Model
 
     protected $fillable = [
         'section_key',
-        'sorting',
+        'sort_order',
     ];
 
     protected static function booted(): void

@@ -20,7 +20,7 @@ class ContentService
             )
             ->with('section')
             ->where('content_section_translations.locale', $locale)
-            ->orderBy('content_sections.sorting')
+            ->orderBy('content_sections.sort_order')
             ->select('content_section_translations.*')
             ->get()
             ->filter(fn (ContentSectionTranslation $translation) => $translation->section !== null)
@@ -46,16 +46,16 @@ class ContentService
         return $section;
     }
 
-    public function create(string $key, string $locale, array $data, int $sorting = 0): ContentSectionTranslation
+    public function create(string $key, string $locale, array $data, int $sort_order = 0): ContentSectionTranslation
     {
-        return $this->update($key, $locale, $data, $sorting);
+        return $this->update($key, $locale, $data, $sort_order);
     }
 
-    public function update(string $key, string $locale, array $data, int $sorting = 0): ContentSectionTranslation
+    public function update(string $key, string $locale, array $data, int $sort_order = 0): ContentSectionTranslation
     {
         $section = ContentSection::firstOrCreate(
             ['section_key' => $key],
-            ['sorting' => $sorting]
+            ['sort_order' => $sort_order]
         );
 
         return ContentSectionTranslation::updateOrCreate(

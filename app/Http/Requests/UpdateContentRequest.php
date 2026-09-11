@@ -11,7 +11,7 @@ class UpdateContentRequest extends FormRequest
         return [
             'data'   => ['required', 'array'],
             'data.*' => ['nullable'],
-            'sorting' => ['optional', 'integer'],
+            'sort_order' => ['optional', 'integer'],
         ];
     }
 }

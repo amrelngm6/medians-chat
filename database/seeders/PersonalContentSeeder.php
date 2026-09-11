@@ -658,11 +658,13 @@ class PersonalContentSeeder extends Seeder
 
     public function run(): void
     {
+        $i = 1;
         foreach ($this->translations as $sectionKey => $locales) {
 
             // 1. Upsert the parent section row (locale-agnostic).
             $section = ContentSection::firstOrCreate(
-                ['section_key' => $sectionKey]
+                ['section_key' => $sectionKey],
+                ['sort_order' => $i],
             );
 
             // 2. For every locale, build the merged payload and upsert the translation.
@@ -678,6 +680,7 @@ class PersonalContentSeeder extends Seeder
                     ['data' => $merged]
                 );
             }
+            $i++;
         }
     }
 

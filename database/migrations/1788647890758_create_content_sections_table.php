@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('content_sections', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
             $table->string('section_key');
-            $table->integer('sorting');
+            $table->integer('sort_order');
             $table->timestamps();
         });
     }
