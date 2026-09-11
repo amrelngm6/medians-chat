@@ -2,8 +2,8 @@
     <div id="text-popover" class="text-popover">
         <!-- <button id="translateBtn">Translate</button> -->
         <div class=" flex gap-2">
-            <button id="speechBtn" class="btn btn-sm text-white btn-corner bg-cyan-700 hover-scale">{{ __('Speech') }}</button>
-            <!-- <button id="addTaskBtn" class="btn btn-sm text-white btn-corner bg-grad-blue hover-scale">{{ __('Add Task') }}</button> -->
+            <button id="speechBtn" class="btn btn-sm text-white btn-corner bg-cyan-700 hover-scale"><?php echo e(__('Speech')); ?></button>
+            <!-- <button id="addTaskBtn" class="btn btn-sm text-white btn-corner bg-grad-blue hover-scale"><?php echo e(__('Add Task')); ?></button> -->
             <select id="voices-select" class="hidden"></select>
         </div>
     </div>
@@ -171,5 +171,29 @@
                 synth.speak(utterThis);
             }
         }
+
+        
+        /**
+         * Handle Text 2 Speech
+         */
+        function text2speechEvent() {
+            
+            // Add click listener for elements with data-speech-target attribute
+            // Without jQuery, you can use vanilla JavaScript to add the click listener
+            document.addEventListener("click", (event) => {
+                const targetElement = event.target.closest("[data-speech-target]");
+                if (targetElement) {
+                    console.log('Speech target:', targetElement.getAttribute('data-speech-target'));
+                    const target = targetElement.getAttribute('data-speech-target');
+                    runSpeechRecognition('#' + target, '#' + targetElement.getAttribute('id'));
+                }
+            });
+    
+            // Add selection change listener for text selection within the document
+            window.addEventListener("selectionchange", (event) => {
+                setTimeout(handleEvent, 500)
+            });
+        }
         
     </script>
+<?php /**PATH C:\xampp\htdocs\medians_chat\resources\views/assets/text-select-speech.blade.php ENDPATH**/ ?>
