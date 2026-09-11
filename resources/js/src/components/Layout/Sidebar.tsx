@@ -123,7 +123,7 @@ export function Sidebar({ isOpen = false, isCollapsed = false, onClose }: Sideba
         )}>
           <div className={clsx('flex items-center gap-3 overflow-hidden', isCollapsed && 'lg:justify-center')}>
             <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-black/80 to-black shadow-md shadow-black/20 dark:shadow-black/30">
-              <Icons.Zap size={18} className="text-white" />
+              <Icons.Wand2Icon size={18} className="text-white" />
             </div>
             <div className={clsx('overflow-hidden', isCollapsed && 'lg:hidden')}>
               <h1 className="text-sm font-bold text-gray-900 dark:text-white truncate leading-tight">
