@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Database\Seeders\UserSeeder;
-use Database\Seeders\PersonalContentSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,6 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             PersonalContentSeeder::class,
             SettingsSeeder::class,
+            MenuSeeder::class,
         ]);
 
     }
