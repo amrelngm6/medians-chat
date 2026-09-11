@@ -463,7 +463,6 @@ const startConversationFlow = async (flowKey) => {
         requestAnimationFrame(() => {
           msgBubble.style.opacity = "1";
         });
-          console.log(contentFlow);
 
         if (contentFlow.type === "projects-sequence") {
           if (contentFlow.text) {

@@ -156,7 +156,6 @@
 
                 for (let i = 0; i < voices.length; i++) {
 
-                    // console.log(voices[i], voices[i].name.toLowerCase(), textLanguage.toLowerCase())
                     //  If voice name include the same language as the selected text
                     if ( voices[i].name.toLowerCase().includes( textLanguage.toLowerCase()) ) {
                         utterThis.voice = voices[i];

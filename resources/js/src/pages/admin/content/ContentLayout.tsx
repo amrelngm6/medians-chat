@@ -24,7 +24,6 @@ function ContentPage() {
   if (!active) {
     active = sectionComponents.generic;
   }
-  console.log('Active component:', urlActiveKey, active);
 
   // Invalid / unknown component
   if (!active) {
