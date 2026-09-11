@@ -813,7 +813,7 @@ function MediaLibraryPage() {
             <span>Upload new files or try changing your search query or filter.</span>
             <button
               className="btn-add"
-              style={{ marginTop: 12 }}
+              style={{ margin: '12px auto' }}
               onClick={() => fileInputRef.current?.click()}
             >
               <Upload size={14} /> Upload Files
