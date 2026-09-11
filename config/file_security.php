@@ -91,8 +91,6 @@ return [
     |
     */
     'allowed_upload_directories' => [
-        'storage/app/public/files/',
-        'storage/app/public/documents/',
         'storage/app/public/uploads/',
     ],
 
@@ -106,7 +104,6 @@ return [
     |
     */
     'allowed_download_directories' => [
-        'storage/app/public/files/',
         'storage/app/public/uploads/',
     ],
 
