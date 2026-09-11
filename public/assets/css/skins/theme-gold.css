@@ -1,0 +1,12 @@
+/* =================================================================== */
+/* GOLD Theme 
+====================================================================== */
+:root {
+    --theme-color-rgb: 242, 170, 2;
+    --theme-color: rgb(242, 170, 2);
+    --theme-secondary-color: rgb(242, 170, 2);
+}
+
+.hero-intro-screen .animate-bg {
+    background-image: url('/img/intro/theme-gold.gif');
+}

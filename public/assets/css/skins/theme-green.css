@@ -1,0 +1,12 @@
+/* =================================================================== */
+/* LUCKY GREEN rgb(11, 163, 80)
+====================================================================== */
+:root {
+    --theme-color-rgb: 11, 163, 80;
+    --theme-color: rgb(11, 163, 80);
+    --theme-secondary-color: rgb(11, 163, 80);
+}
+
+.hero-intro-screen .animate-bg {
+    background-image: url('/img/intro/theme-green.gif');
+}

@@ -1,0 +1,12 @@
+/* =================================================================== */
+/* SPRING SKY rgb(51, 181, 231)
+====================================================================== */
+:root {
+    --theme-color-rgb: 51, 181, 231;
+    --theme-color: rgb(51, 181, 231);
+    --theme-secondary-color: rgb(51, 181, 231);
+}
+
+.hero-intro-screen .animate-bg {
+    background-image: url('/img/intro/theme-cyan.gif');
+}

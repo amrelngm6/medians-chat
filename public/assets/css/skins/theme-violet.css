@@ -1,0 +1,12 @@
+/* =================================================================== */
+/* VIOLET PUNK rgb(157, 107, 255)
+====================================================================== */
+:root {
+    --theme-color-rgb: 157, 107, 255;
+    --theme-color: rgb(157, 107, 255);
+    --theme-secondary-color: rgb(157, 107, 255);
+}
+
+.hero-intro-screen .animate-bg {
+    background-image: url('/img/intro/theme-violet.gif');
+}

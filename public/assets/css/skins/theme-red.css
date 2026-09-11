@@ -1,0 +1,12 @@
+/* =================================================================== */
+/* FUNKY RED rgb(233, 28, 42)
+====================================================================== */
+:root {
+    --theme-color-rgb: 233, 28, 42;
+    --theme-color: rgb(233, 28, 42);
+    --theme-secondary-color: rgb(233, 28, 42);
+}
+
+.hero-intro-screen .animate-bg {
+    background-image: url('/img/intro/theme-red.gif');
+}

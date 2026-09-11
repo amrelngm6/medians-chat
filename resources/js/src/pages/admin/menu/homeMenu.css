@@ -1,0 +1,671 @@
+/* ============================================================
+   homeMenu.css — styles for the Home Menu management page.
+   Shares design tokens (--primary, --surface, --border, etc.)
+   with settings.css; extends with list-row, drawer, and modal
+   patterns specific to menu management.
+   ============================================================ */
+
+/* ── Page layout ──────────────────────────────────────────── */
+.menu-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+/* ── Page header ──────────────────────────────────────────── */
+.menu-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.menu-page-header-left h1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 4px;
+}
+
+.menu-page-header-left h1 svg {
+  color: var(--primary);
+}
+
+.menu-page-header-left p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ── Stats bar ────────────────────────────────────────────── */
+.menu-stats-bar {
+  display: flex;
+  gap: 20px;
+  padding: 10px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  align-self: flex-start;
+}
+
+.menu-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.menu-stat svg {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.menu-stat strong {
+  color: var(--text-dark);
+}
+
+/* ── Global feedback banner ───────────────────────────────── */
+.menu-feedback {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.menu-feedback.success {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #059669;
+}
+
+.menu-feedback.error {
+  background: rgba(239, 68, 68, 0.07);
+  border: 1px solid rgba(239, 68, 68, 0.22);
+  color: #dc2626;
+}
+
+/* ── Main content area ────────────────────────────────────── */
+.menu-content-area {
+  flex: 1;
+  min-height: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── List column headings ─────────────────────────────────── */
+.menu-list-header {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr 60px 100px;
+  gap: 10px;
+  align-items: center;
+  padding: 9px 16px;
+  background: var(--surface-elevated, var(--surface));
+  border-bottom: 1px solid var(--border);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Menu rows list ───────────────────────────────────────── */
+.menu-list {
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ── Individual menu row ──────────────────────────────────── */
+.menu-row {
+  display: grid;
+  grid-template-columns: 18px auto 18px 2fr 2fr 1fr 60px 100px;
+  gap: 10px;
+  align-items: center;
+  padding: 9px 16px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.12s ease;
+}
+
+.menu-row:last-child {
+  border-bottom: none;
+}
+
+.menu-row:hover {
+  background: var(--surface-hover, rgba(0, 0, 0, 0.025));
+}
+
+.menu-row--child {
+  background: rgba(99, 102, 241, 0.02);
+}
+
+/* Drag handle */
+.menu-row-drag {
+  color: var(--border);
+  cursor: grab;
+  display: flex;
+  align-items: center;
+}
+
+.menu-row-drag:hover {
+  color: var(--text-muted);
+}
+
+/* Indent marker for children */
+.menu-row-indent {
+  color: var(--primary);
+  opacity: 0.4;
+  display: flex;
+  align-items: center;
+}
+
+/* Icon column */
+.menu-row-icon {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.menu-row-icon-text {
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Title */
+.menu-row-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* URL */
+.menu-row-url {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menu-row-url em {
+  opacity: 0.5;
+  font-style: normal;
+}
+
+/* Meta badges cluster */
+.menu-row-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* Sort order */
+.menu-row-order {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Actions */
+.menu-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+/* ── Status & target badges ───────────────────────────────── */
+.menu-status-badge,
+.menu-target-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 7px;
+  border-radius: 20px;
+  font-size: 10.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.menu-status-badge.active {
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.menu-status-badge.inactive {
+  background: rgba(0, 0, 0, 0.05);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.menu-target-badge {
+  background: rgba(99, 102, 241, 0.08);
+  color: var(--primary);
+  border: 1px solid rgba(99, 102, 241, 0.18);
+}
+
+/* ── Row action buttons ───────────────────────────────────── */
+.menu-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0 7px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.menu-action-btn:hover {
+  background: var(--surface-hover, rgba(0, 0, 0, 0.05));
+  color: var(--text-dark);
+  border-color: var(--text-muted);
+}
+
+.menu-action-btn.danger:hover {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: #ef4444;
+  color: #dc2626;
+}
+
+/* ── Empty state ──────────────────────────────────────────── */
+.menu-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 64px 24px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.menu-empty svg {
+  opacity: 0.3;
+  margin-bottom: 4px;
+}
+
+.menu-empty p {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.menu-empty span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ── Loading / error state ────────────────────────────────── */
+.menu-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 60px 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.menu-loading.error {
+  color: #dc2626;
+}
+
+/* ── Spin animation (shared with settings.css) ────────────── */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* DRAWER                                                      */
+/* ─────────────────────────────────────────────────────────── */
+
+.menu-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 200;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.menu-drawer {
+  width: 420px;
+  max-width: 100vw;
+  height: 100%;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  animation: slideInRight 0.2s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Drawer header */
+.menu-drawer-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-elevated, var(--surface));
+}
+
+.menu-drawer-header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.menu-drawer-header-left svg {
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.menu-drawer-header-left h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 2px;
+}
+
+.menu-drawer-header-left p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.menu-drawer-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.14s ease;
+}
+
+.menu-drawer-close:hover {
+  background: var(--surface-hover, rgba(0, 0, 0, 0.05));
+  color: var(--text-dark);
+}
+
+/* Drawer body */
+.menu-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Drawer footer */
+.menu-drawer-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  background: var(--surface-elevated, var(--surface));
+}
+
+/* ── Form fields (inside drawer) ──────────────────────────── */
+.menu-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.menu-field-group label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.menu-field-group label .required {
+  color: #ef4444;
+  margin-left: 2px;
+}
+
+.menu-field-group input,
+.menu-field-group textarea,
+.menu-field-group select {
+  width: 100%;
+  padding: 8px 11px;
+  font-size: 13px;
+  color: var(--text-dark);
+  background: var(--bg, #fff);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.menu-field-group input:focus,
+.menu-field-group textarea:focus,
+.menu-field-group select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.menu-field-group input.field-error,
+.menu-field-group textarea.field-error,
+.menu-field-group select.field-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.10);
+}
+
+.menu-field-desc {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.menu-field-error {
+  font-size: 11.5px;
+  color: #ef4444;
+  margin: 0;
+}
+
+/* Two-column field row */
+.menu-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ── Toggle (mirrors settings-toggle exactly) ─────────────── */
+.menu-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 11px;
+  background: var(--bg, #fff);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+}
+
+.menu-toggle {
+  position: relative;
+  display: inline-flex;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.menu-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.menu-toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  border: 1px solid #00000030;
+}
+
+.menu-toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 3px;
+  top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease;
+}
+
+.menu-toggle input:checked+.menu-toggle-slider {
+  background: var(--primary);
+}
+
+.menu-toggle input:checked+.menu-toggle-slider::before {
+  transform: translateX(16px);
+}
+
+.menu-toggle-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* DELETE CONFIRM MODAL                                        */
+/* ─────────────────────────────────────────────────────────── */
+
+.menu-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.menu-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 380px;
+  animation: fadeScaleIn 0.15s ease;
+  overflow: hidden;
+}
+
+@keyframes fadeScaleIn {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.menu-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 18px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.menu-modal-header svg {
+  color: #ef4444;
+}
+
+.menu-modal-header h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.menu-modal-body {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  padding: 16px 18px;
+  margin: 0;
+}
+
+.menu-modal-body strong {
+  color: var(--text-dark);
+}
+
+.menu-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--border);
+  background: var(--surface-elevated, var(--surface));
+}

@@ -1,0 +1,12 @@
+/* =================================================================== */
+/* SUPER ORANGE rgb(250, 91, 15)
+====================================================================== */
+:root {
+    --theme-color-rgb: 250, 91, 15;
+    --theme-color: rgb(250, 91, 15);
+    --theme-secondary-color: rgb(250, 91, 15);
+}
+
+.hero-intro-screen .animate-bg {
+    background-image: url('/img/intro/theme-orange.gif');
+}

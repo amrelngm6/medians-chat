@@ -1,0 +1,12 @@
+/* =================================================================== */
+/* STRONG PINK rgb(217, 11, 144)
+====================================================================== */
+:root {
+    --theme-color-rgb: 217, 11, 144;
+    --theme-color: rgb(217, 11, 144);
+    --theme-secondary-color: rgb(217, 11, 144);
+}
+
+.hero-intro-screen .animate-bg {
+    background-image: url('/img/intro/theme-pink.gif');
+}

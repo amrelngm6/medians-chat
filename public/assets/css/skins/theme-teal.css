@@ -1,0 +1,12 @@
+/* =================================================================== */
+/* EXOTIC TEAL rgb(20, 171, 161)
+====================================================================== */
+:root {
+    --theme-color-rgb: 20, 171, 161;
+    --theme-color: rgb(20, 171, 161);
+    --theme-secondary-color: rgb(20, 171, 161);
+}
+
+.hero-intro-screen .animate-bg {
+    background-image: url('/img/intro/theme-teal.gif');
+}

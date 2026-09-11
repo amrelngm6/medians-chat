@@ -1,0 +1,923 @@
+/* ============================================================
+   formMessages.css — styles for the Form Messages management page.
+   Shares design tokens (--primary, --surface, --border, etc.)
+   with homeMenu.css; provides table layout, status badges, filter
+   tabs, drawer panel, and delete confirmation modal.
+   ============================================================ */
+
+/* ── Page layout ──────────────────────────────────────────── */
+.form-messages-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+/* ── Page header ──────────────────────────────────────────── */
+.form-messages-page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.form-messages-page-header-left h1 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 4px;
+}
+
+.form-messages-page-header-left h1 svg {
+  color: var(--primary);
+}
+
+.form-messages-page-header-left p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ── Stats bar ────────────────────────────────────────────── */
+.form-messages-stats-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  align-self: flex-start;
+}
+
+.form-messages-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.form-messages-stat:hover {
+  background: var(--surface-hover, rgba(0, 0, 0, 0.03));
+  border-color: var(--border);
+}
+
+.form-messages-stat.active {
+  background: rgba(99, 102, 241, 0.08);
+  border-color: rgba(99, 102, 241, 0.25);
+  color: var(--primary);
+}
+
+.form-messages-stat svg {
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.form-messages-stat strong {
+  color: var(--text-dark);
+}
+
+.form-messages-stat.active strong {
+  color: var(--primary);
+}
+
+/* ── Filter / Search Bar ──────────────────────────────────── */
+.form-messages-filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.form-messages-search-box {
+  position: relative;
+  flex: 1;
+  min-width: 240px;
+  max-width: 400px;
+}
+
+.form-messages-search-box svg {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.form-messages-search-input {
+  width: 100%;
+  padding: 8px 32px 8px 34px;
+  font-size: 13px;
+  color: var(--text-dark);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+}
+
+.form-messages-search-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.form-messages-clear-btn {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.form-messages-clear-btn:hover {
+  color: var(--text-dark);
+  background: var(--surface-hover, rgba(0, 0, 0, 0.05));
+}
+
+.form-messages-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-messages-select {
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--text-dark);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.form-messages-select:focus {
+  border-color: var(--primary);
+}
+
+/* ── Global feedback banner ───────────────────────────────── */
+.form-messages-feedback {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.form-messages-feedback.success {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #059669;
+}
+
+.form-messages-feedback.error {
+  background: rgba(239, 68, 68, 0.07);
+  border: 1px solid rgba(239, 68, 68, 0.22);
+  color: #dc2626;
+}
+
+/* ── Main content area ────────────────────────────────────── */
+.form-messages-content-area {
+  flex: 1;
+  min-height: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── List column headings ─────────────────────────────────── */
+.form-messages-list-header {
+  display: grid;
+  grid-template-columns: 1.8fr 2.5fr 1fr 100px 120px 130px;
+  gap: 12px;
+  align-items: center;
+  padding: 9px 16px;
+  background: var(--surface-elevated, var(--surface));
+  border-bottom: 1px solid var(--border);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Messages rows list ───────────────────────────────────── */
+.form-messages-list {
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ── Individual message row ───────────────────────────────── */
+.form-messages-row {
+  display: grid;
+  grid-template-columns: 1.8fr 2.5fr 1fr 100px 120px 130px;
+  gap: 12px;
+  align-items: center;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.12s ease;
+  cursor: pointer;
+}
+
+.form-messages-row:last-child {
+  border-bottom: none;
+}
+
+.form-messages-row:hover {
+  background: var(--surface-hover, rgba(0, 0, 0, 0.025));
+}
+
+.form-messages-row.is-unread {
+  background: rgba(99, 102, 241, 0.03);
+  font-weight: 600;
+}
+
+.form-messages-row.is-unread .form-messages-row-sender-name {
+  color: var(--primary);
+}
+
+/* Sender column */
+.form-messages-row-sender {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.form-messages-row-sender-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.form-messages-row-sender-email {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Subject & Message column */
+.form-messages-row-subject {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.form-messages-row-subject-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.form-messages-row-subject-preview {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Form Key column */
+.form-messages-row-formkey {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--surface-elevated, rgba(0, 0, 0, 0.04));
+  color: var(--text-dark);
+  border: 1px solid var(--border);
+  width: fit-content;
+  white-space: nowrap;
+}
+
+/* Date column */
+.form-messages-row-date {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Actions column */
+.form-messages-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+/* ── Status badges ────────────────────────────────────────── */
+.form-messages-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-size: 10.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.form-messages-status-badge.new {
+  background: rgba(99, 102, 241, 0.1);
+  color: var(--primary);
+  border: 1px solid rgba(99, 102, 241, 0.22);
+}
+
+.form-messages-status-badge.read {
+  background: rgba(107, 114, 128, 0.1);
+  color: #4b5563;
+  border: 1px solid rgba(107, 114, 128, 0.2);
+}
+
+.form-messages-status-badge.replied {
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.form-messages-status-badge.archived {
+  background: rgba(139, 92, 246, 0.1);
+  color: #7c3aed;
+  border: 1px solid rgba(139, 92, 246, 0.22);
+}
+
+.form-messages-status-badge.spam {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.22);
+}
+
+/* ── Action buttons ───────────────────────────────────────── */
+.form-messages-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.form-messages-action-btn:hover {
+  background: var(--surface-hover, rgba(0, 0, 0, 0.05));
+  color: var(--text-dark);
+  border-color: var(--text-muted);
+}
+
+.form-messages-action-btn.danger:hover {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: #ef4444;
+  color: #dc2626;
+}
+
+.form-messages-action-btn.primary:hover {
+  background: rgba(99, 102, 241, 0.08);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* ── Empty state ──────────────────────────────────────────── */
+.form-messages-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 64px 24px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.form-messages-empty svg {
+  opacity: 0.3;
+  margin-bottom: 4px;
+}
+
+.form-messages-empty p {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.form-messages-empty span {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ── Loading / error state ────────────────────────────────── */
+.form-messages-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 60px 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.form-messages-loading.error {
+  color: #dc2626;
+}
+
+/* ── Spin animation ───────────────────────────────────────── */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 0.8s linear infinite;
+}
+
+/* ── Pagination ───────────────────────────────────────────── */
+.form-messages-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--surface-elevated, var(--surface));
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.form-messages-pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-messages-page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-dark);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.14s ease;
+}
+
+.form-messages-page-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.form-messages-page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* DRAWER (Slide-in Detail & Reply)                            */
+/* ─────────────────────────────────────────────────────────── */
+
+.form-messages-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 200;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-messages-drawer {
+  width: 500px;
+  max-width: 100vw;
+  height: 100%;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  animation: slideInRight 0.2s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.form-messages-drawer-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-elevated, var(--surface));
+}
+
+.form-messages-drawer-header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.form-messages-drawer-header-left svg {
+  color: var(--primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.form-messages-drawer-header-left h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 2px;
+}
+
+.form-messages-drawer-header-left p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.form-messages-drawer-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.14s ease;
+}
+
+.form-messages-drawer-close:hover {
+  background: var(--surface-hover, rgba(0, 0, 0, 0.05));
+  color: var(--text-dark);
+}
+
+.form-messages-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Sender Info Box */
+.form-messages-info-card {
+  background: var(--surface-elevated, var(--bg, #f9fafb));
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-messages-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.form-messages-info-label {
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-messages-info-val {
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+/* Message Content Box */
+.form-messages-body-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-messages-body-box label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-messages-subject-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 6px;
+}
+
+.form-messages-content-text {
+  font-size: 13.5px;
+  color: var(--text-dark);
+  line-height: 1.6;
+  background: var(--bg, #fff);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Existing Reply Box */
+.form-messages-reply-existing {
+  background: rgba(16, 185, 129, 0.04);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-messages-reply-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #059669;
+  font-weight: 600;
+}
+
+.form-messages-reply-content {
+  font-size: 13px;
+  color: var(--text-dark);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* Reply Form Box */
+.form-messages-reply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.form-messages-reply-form label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-messages-reply-textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--text-dark);
+  background: var(--bg, #fff);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.form-messages-reply-textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.form-messages-drawer-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  background: var(--surface-elevated, var(--surface));
+}
+
+.form-messages-drawer-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* BUTTONS (Mirrors homeMenu.css)                              */
+/* ─────────────────────────────────────────────────────────── */
+
+.btn-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.btn-add:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+}
+
+
+.btn-save:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+}
+
+.btn-save:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-save.saved {
+  background: #10b981;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--surface-hover, rgba(0, 0, 0, 0.04));
+  color: var(--text-dark);
+}
+
+.btn-ghost:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #dc2626;
+}
+
+.btn-danger:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ─────────────────────────────────────────────────────────── */
+/* DELETE CONFIRM MODAL (Mirrors homeMenu.css)                 */
+/* ─────────────────────────────────────────────────────────── */
+
+.form-messages-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.form-messages-modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  animation: fadeScaleIn 0.15s ease;
+  overflow: hidden;
+}
+
+@keyframes fadeScaleIn {
+  from {
+    transform: scale(0.96);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.form-messages-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 18px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.form-messages-modal-header svg {
+  color: #ef4444;
+}
+
+.form-messages-modal-header h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.form-messages-modal-body {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  padding: 16px 18px;
+  margin: 0;
+}
+
+.form-messages-modal-body strong {
+  color: var(--text-dark);
+}
+
+.form-messages-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--border);
+  background: var(--surface-elevated, var(--surface));
+}

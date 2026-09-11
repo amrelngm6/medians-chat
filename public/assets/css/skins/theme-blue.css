@@ -1,0 +1,12 @@
+/* =================================================================== */
+/* BLUE Theme 
+====================================================================== */
+:root {
+    --theme-color-rgb: 65, 105, 225;
+    --theme-color: rgb(65, 105, 225);
+    --theme-secondary-color: rgb(65, 105, 225);
+}
+
+.hero-intro-screen .animate-bg {
+    background-image: url('/img/intro/theme-blue.gif');
+}

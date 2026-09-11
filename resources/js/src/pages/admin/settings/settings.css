@@ -1,0 +1,328 @@
+/* ============================================================
+   settings.css — styles for the Settings page
+   Mirrors content.css structure; extends with settings-specific
+   field types (toggle, select badge, feedback banner).
+   ============================================================ */
+
+/* ── Page layout ──────────────────────────────────────────── */
+.settings-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+}
+
+.settings-page-header h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 4px;
+}
+
+.settings-page-header p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.settings-layout {
+  display: flex;
+  gap: 20px;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ── Section Nav (identical to .section-nav) ──────────────── */
+.settings-nav {
+  width: 190px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px;
+  align-self: flex-start;
+  position: sticky;
+  top: 0;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+}
+
+.settings-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+  width: 100%;
+}
+
+.settings-nav-item:hover {
+  background: var(--surface-hover, rgba(0, 0, 0, 0.04));
+  color: var(--text-dark);
+}
+
+.settings-nav-item.active {
+  background: var(--primary, #6366f1);
+  color: #fff;
+}
+
+.settings-nav-item svg {
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.settings-nav-item.active svg {
+  opacity: 1;
+}
+
+/* ── Editor Area (identical to .editor-area) ──────────────── */
+.settings-editor-area {
+  flex: 1;
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-editor-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-elevated, var(--surface));
+}
+
+.settings-editor-header-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.settings-editor-header button svg {
+  color: #fff;
+}
+
+.settings-editor-header svg {
+  color: var(--primary, #6366f1);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.settings-editor-header h2 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 2px;
+}
+
+.settings-editor-header p {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.settings-editor-body {
+  padding: 22px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* ── Group editor (mirrors .section-editor) ───────────────── */
+.settings-group-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Hint banner (mirrors .editor-hint) ───────────────────── */
+.settings-hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 10px 14px;
+  background: var(--surface-hover, rgba(99, 102, 241, 0.05));
+  border-left: 3px solid var(--primary, #6366f1);
+  border-radius: 6px;
+  margin: 0;
+}
+
+/* ── Field groups (mirrors .field-group) ──────────────────── */
+.settings-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.settings-field-group label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.settings-field-group input,
+.settings-field-group textarea,
+.settings-field-group select {
+  width: 100%;
+  padding: 8px 11px;
+  font-size: 13px;
+  color: var(--text-dark);
+  background: var(--bg, #fff);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  font-family: inherit;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.settings-field-group input:focus,
+.settings-field-group textarea:focus,
+.settings-field-group select:focus {
+  border-color: var(--primary, #6366f1);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+.settings-field-group input.field-error,
+.settings-field-group textarea.field-error,
+.settings-field-group select.field-error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.settings-field-desc {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.settings-field-error {
+  font-size: 11.5px;
+  color: #ef4444;
+  margin: 0;
+}
+
+/* Grid layout for fields (mirrors .editor-grid) ──────────── */
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+/* ── Toggle field ─────────────────────────────────────────── */
+.settings-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 11px;
+  background: var(--bg, #fff);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+}
+
+.settings-toggle {
+  position: relative;
+  display: inline-flex;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.settings-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.settings-toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  border: 1px solid #00000030;
+}
+
+.settings-toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: 3px;
+  top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  transition: transform 0.2s ease;
+}
+
+.settings-toggle input:checked+.settings-toggle-slider {
+  background: var(--primary, #6366f1);
+}
+
+.settings-toggle input:checked+.settings-toggle-slider::before {
+  transform: translateX(16px);
+}
+
+.settings-toggle-label {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ── Feedback banners (mirrors .editor-hint style) ────────── */
+.settings-feedback {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.settings-feedback.success {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #059669;
+}
+
+.settings-feedback.error {
+  background: rgba(239, 68, 68, 0.07);
+  border: 1px solid rgba(239, 68, 68, 0.22);
+  color: #dc2626;
+}
+
+.settings-feedback.dirty {
+  background: rgba(245, 158, 11, 0.07);
+  border: 1px solid rgba(245, 158, 11, 0.22);
+  color: #b45309;
+}
+
+
+/* ── Loading state ────────────────────────────────────────── */
+.settings-loading {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+}
