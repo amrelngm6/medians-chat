@@ -1,4 +1,0 @@
-<?php $__currentLoopData = $buttons ?? []; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $button): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-<li <?php if(!empty($button['action'])): ?> data-action="<?php echo e($button['action']); ?>" <?php endif; ?> <?php if(!empty($button['link'])): ?> data-link="<?php echo e($button['link']); ?>" <?php endif; ?> <?php if(!empty($button['styleClass'])): ?> data-class="<?php echo e($button['styleClass']); ?>" <?php endif; ?>><?php echo e($button['label'] ?? ''); ?></li>
-<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-<?php /**PATH C:\xampp\htdocs\medians_chat\resources\views/sections/components/options_list.blade.php ENDPATH**/ ?>
