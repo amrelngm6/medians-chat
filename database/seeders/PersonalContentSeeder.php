@@ -144,7 +144,10 @@ class PersonalContentSeeder extends Seeder
             'en' => [
                 'intro' => 'I am providing top-notch services to meet your needs. Click on <strong>View My Services</strong> to explore what I offer.',
                 'items' => [
-                    ['title' => 'Web Development',   'summary' => 'Building responsive and interactive websites tailored to your needs using modern technologies.'],
+                    [
+                        'title' => 'Web Development',   
+                        'summary' => 'Building responsive and interactive websites tailored to your needs using modern technologies.'
+                    ],
                     ['title' => 'Mobile App Development',   'summary' => 'Creating user-friendly mobile applications for both iOS and Android platforms.'],
                     ['title' => 'UI/UX Design',     'summary' => 'Designing intuitive and visually appealing user interfaces and experiences.'],
                     ['title' => 'Digital Marketing', 'summary' => 'Implementing effective digital marketing strategies to enhance your online presence.'],
@@ -562,6 +565,47 @@ class PersonalContentSeeder extends Seeder
                 ['action' => 'contact', 'styleClass' => 'btn-secondary'],
             ],
         ],
+        
+
+        'services' => [
+            'items' => [
+                [
+                    'link'      => 'https://link-to-your-website.com',
+                    'image'     => 'img/services/project-1.jpg',
+                    'mediaType' => 'gallery',
+                    'gallery'   => [
+                        'img/projects/project-1-big.jpg',
+                        'img/projects/project-2-big.jpg',
+                        'img/projects/project-3-big.jpg',
+                    ],
+                ],
+                [
+                    'link'      => 'https://link-to-your-website.com',
+                    'image'     => 'img/projects/project-2.jpg',
+                    'mediaType' => 'youtube',
+                    'youtubeId' => 'SjJhuZQlkbA',
+                ],
+                [
+                    'link'      => '',
+                    'image'     => 'img/projects/project-3.jpg',
+                    'mediaType' => 'image',
+                ],
+                [
+                    'link'      => 'https://link-to-your-website.com',
+                    'image'     => 'img/projects/project-4.jpg',
+                    'mediaType' => 'video',
+                    'videoUrl'  => 'img/video.mp4',
+                ],
+            ],
+            'globalButtons' => [
+                ['action' => 'clients', 'styleClass' => 'btn-secondary'],
+            ],
+            'finalButtons' => [
+                ['action' => 'clients', 'styleClass' => ''],
+                ['action' => 'contact', 'styleClass' => 'btn-secondary'],
+            ],
+        ],
+        
 
         'clients' => [
             'items' => [
