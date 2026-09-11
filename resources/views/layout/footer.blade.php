@@ -58,6 +58,7 @@
 
 
     @include('assets.speech-recognise')
+    @include('assets.text-select-speech')
 
     <script>
     window.contentJson = {};
