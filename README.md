@@ -57,7 +57,7 @@ graph TD
 
 ## 📋 System Requirements
 
-- **PHP:** `^8.2.4` (PHP 8.2 or 8.3 recommended)
+- **PHP:** `^8.2.4` (PHP 8.2 or 8.4 recommended)
 - **PHP Extensions:** `OpenSSL`, `PDO`, `PDO_MySQL`, `Mbstring`, `Tokenizer`, `XML`, `Ctype`, `JSON`, `BCMath`, `Fileinfo`, `Zip`, `cURL`
 - **Database:** MySQL 8.0+ / MariaDB 10.4+
 - **Node.js:** 18.x or 20.x + npm 9+
