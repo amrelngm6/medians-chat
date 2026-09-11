@@ -44,14 +44,12 @@ return new class extends Migration
             $table->text('user_agent')->nullable();
 
             $table->dateTime('read_at')->nullable();
-            $table->dateTime('created_at')->default(DB::raw('CURRENT_TIMESTAMP(3)'));
-            $table->dateTime('updated_at')->default(DB::raw('CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3)'));
-            $table->dateTime('deleted_at')->nullable();  // soft delete
+            $table->timestamps();
+            $table->softDeletes();  // adds deleted_at column for soft deletes
 
             $table->index('status');
             $table->index('form_key');
             $table->index('email');
-            $table->index('created_at');
         });
     }
 
