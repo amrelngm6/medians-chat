@@ -21,7 +21,7 @@ function runSpeechRecognition(elementId, micIcon = null) {
 
     recognition.onresult = function(event) {
         var speechResult = event.results[0][0].transcript.toLowerCase();
-        var oldValue = jQuery(micIcon).data('append') ? (inputValue+' ') : ''
+        var oldValue = iconElement?.dataset.append ? (inputValue+' ') : ''
         inputElement.value = oldValue+speechResult;
         inputElement?.dispatchEvent(
             new Event("change", { bubbles: true })
